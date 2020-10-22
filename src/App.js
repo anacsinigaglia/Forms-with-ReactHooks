@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import {Container, Typography } from "@material-ui/core"
+import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 import 'fontsource-roboto';
 import "./App.css";
-import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 
 class App extends Component {
   render() {
