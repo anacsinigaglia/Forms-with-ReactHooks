@@ -8,6 +8,7 @@ function PersonalData({onSend: onSend, validateCPF: validateCPF}) {
   const [sales, setSales] = useState(true);
   const [news, setNews] = useState(false);
   const [errors, setErrors] = useState({cpf:{valid:true, text:""}})
+  
   return (
     <form onSubmit={(event) => {
         event.preventDefault();

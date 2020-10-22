@@ -1,21 +1,21 @@
 import React, { Component } from "react";
-import "./App.css";
-import PersonalData from "./components/FormularioCadastro/PersonalData";
-import 'fontsource-roboto';
-
 import {Container, Typography } from "@material-ui/core"
+import 'fontsource-roboto';
+import "./App.css";
+import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
+
 class App extends Component {
   render() {
     return (
       <Container component="article" maxWidth="sm">
         <Typography variant="h3" component="h1" align="center" >Formulário de cadastro</Typography>
-        <PersonalData onSent={onSentForm} validateCPF={validateCPF} />
+        <RegistrationForm onSend={onSendForm} validateCPF={validateCPF} />
       </Container>
     );
   }
 }
 
-function onSentForm(data){
+function onSendForm(data){
   console.log(data);
 }
 
