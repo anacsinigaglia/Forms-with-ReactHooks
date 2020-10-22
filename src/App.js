@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import FormularioCadastro from "./components/FormularioCadastro/FormularioCadastro";
+import PersonalData from "./components/FormularioCadastro/PersonalData";
 import 'fontsource-roboto';
 
 import {Container, Typography } from "@material-ui/core"
@@ -9,21 +9,21 @@ class App extends Component {
     return (
       <Container component="article" maxWidth="sm">
         <Typography variant="h3" component="h1" align="center" >Formulário de cadastro</Typography>
-        <FormularioCadastro aoEnviar={aoEnviarForm} validarCPF={validarCPF} />
+        <PersonalData onSent={onSentForm} validateCPF={validateCPF} />
       </Container>
     );
   }
 }
 
-function aoEnviarForm(dados){
-  console.log(dados);
+function onSentForm(data){
+  console.log(data);
 }
 
-function validarCPF(cpf){
+function validateCPF(cpf){
   if(cpf.length !== 11){
-    return {valido:false, texto:"CPF deve ter 11 digitos."}
+    return {valid:false, text:"CPF deve ter 11 digitos."}
   } else{
-    return {valido:true, texto:""}
+    return {valid:true, text:""}
   }
 }
 

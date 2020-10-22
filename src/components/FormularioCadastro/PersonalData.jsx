@@ -1,33 +1,33 @@
 import React, { useState } from "react";
 import { TextField, Button, Switch, FormControlLabel } from "@material-ui/core";
 
-function FormularioCadastro({aoEnviar, validarCPF}) {
-  const [nome, setNome] = useState("");
-  const [sobrenome, setSobrenome] = useState("");
+function PersonalData({onSend: onSend, validateCPF: validateCPF}) {
+  const [name, setName] = useState("");
+  const [lastName, setSobrenome] = useState("");
   const [cpf, setCpf] = useState("");
-  const [promocoes, setPromocoes] = useState(true);
-  const [novidades, setNovidades] = useState(false);
-  const [erros, setErros] = useState({cpf:{valido:true, texto:""}})
+  const [sales, setSales] = useState(true);
+  const [news, setNews] = useState(false);
+  const [errors, setErrors] = useState({cpf:{valid:true, text:""}})
   return (
     <form onSubmit={(event) => {
         event.preventDefault();
-        aoEnviar({nome, sobrenome, cpf, novidades, promocoes}); }} >
+        onSend({name: name, lastName: lastName, cpf, news: news, sales: sales}); }} >
 
       <TextField
-        value={nome}
+        value={name}
         onChange={(event) => {
-          setNome(event.target.value); }}
-        id="nome"
+          setName(event.target.value); }}
+        id="name"
         label="Nome"
         variant="outlined"
         margin="normal"
         fullWidth />
 
       <TextField
-        value={sobrenome}
+        value={lastName}
         onChange={(event) => {
           setSobrenome(event.target.value); }}
-        id="sobrenome"
+        id="lastName"
         label="Sobrenome"
         variant="outlined"
         margin="normal"
@@ -38,10 +38,10 @@ function FormularioCadastro({aoEnviar, validarCPF}) {
         onChange={(event) => {
           setCpf(event.target.value); }}
         onBlur={(event)=>{
-          const ehValido = validarCPF(cpf);
-          setErros({cpf:ehValido}) }}
-        error={!erros.cpf.valido}
-        helperText={erros.cpf.texto}
+          const isValid = validateCPF(cpf);
+          setErrors({cpf:isValid}) }}
+        error={!errors.cpf.valid}
+        helperText={errors.cpf.text}
         id="CPF"
         label="CPF"
         variant="outlined"
@@ -52,10 +52,10 @@ function FormularioCadastro({aoEnviar, validarCPF}) {
         label="Promoções"
         control={
           <Switch
-            checked={promocoes}
+            checked={sales}
             onChange={(event) => {
-              setPromocoes(event.target.checked); }}
-            name="promocoes"
+              setSales(event.target.checked); }}
+            name="sales"
             color="primary" />
         } />
 
@@ -63,10 +63,10 @@ function FormularioCadastro({aoEnviar, validarCPF}) {
         label="Novidades"
         control={
           <Switch
-            checked={novidades}
+            checked={news}
             onChange={(event) => {
-              setNovidades(event.target.checked); }}
-            name="novidades"
+              setNews(event.target.checked); }}
+            name="news"
             color="primary" />
         } />
 
@@ -77,4 +77,4 @@ function FormularioCadastro({aoEnviar, validarCPF}) {
   );
 }
 
-export default FormularioCadastro;
+export default PersonalData;
