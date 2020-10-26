@@ -13,13 +13,17 @@ function Home() {
           terms: true,
       }
   });
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   return (
     <div>
       <form
-        onSubmit={handleSubmit((formData) => {
-          /*onSubmit é um event listener */
-          console.log(formData, "formData");
+        onSubmit={handleSubmit( async (formData) => {
+            /*onSubmit é um event listener */
+            setSubmitting(true);
+            console.log(formData, "formData");
+            const response = await fetch("/api/auth");
+            setSubmitting(false);
         })}
       >
         <div>
@@ -86,7 +90,9 @@ function Home() {
         </div>
 
         <div>
-          <button type="submit">Register</button>
+          <button type="submit" disabled={submitting}> {/*é desabilitado quando submitting é true, pq daí o usuário não fica enviando 15x a mesma resposta */}
+              Register
+          </button>
         </div>
       </form>
     </div>
