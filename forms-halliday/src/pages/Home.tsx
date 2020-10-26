@@ -5,7 +5,14 @@ import { FormData } from "./interfaces/FormData";
 import "./Home.scss";
 
 function Home() {
-  const { register, handleSubmit, errors } = useForm<FormData>();
+  const { register, handleSubmit, errors } = useForm<FormData>({
+      defaultValues: {
+          name: "Ana",
+          email: "ana@iteris.com.br",
+          password: "P@ssw0rd",
+          terms: true,
+      }
+  });
 
   return (
     <div>
