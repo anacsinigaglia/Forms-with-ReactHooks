@@ -18,11 +18,25 @@ function Home() {
   return (
     <div>
       <form
-        onSubmit={handleSubmit( async (formData) => {
-            /*onSubmit é um event listener */
+        onSubmit={handleSubmit( async (formData) => { /*onSubmit é um event listener */
             setSubmitting(true);
-            console.log(formData, "formData");
-            const response = await fetch("/api/auth");
+
+            // se eu deixasse só: const response = await fetch("/api/auth"); ele faria um get, então faço:
+            const response = await fetch("/api/auth", {
+                method: "POST",
+                headers: { //aqui eu falo que tipo de dado tô passando no post
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    password: formData.password,
+                    terms: formData.terms,
+                })
+            });
+
+            const data = await response.json(); //o retorno eu boto em "data"
+
             setSubmitting(false);
         })}
       >
