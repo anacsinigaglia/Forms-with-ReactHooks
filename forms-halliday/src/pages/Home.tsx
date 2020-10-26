@@ -15,11 +15,14 @@ function Home() {
   });
   const [submitting, setSubmitting] = useState<boolean>(false);
 
+  const [serverErrors, setServerErrors] = useState<Array<string>>([]);
+
   return (
     <div>
       <form
         onSubmit={handleSubmit( async (formData) => { /*onSubmit é um event listener */
             setSubmitting(true);
+            setServerErrors([]); //setando do zero, pra não vir com nada
 
             // se eu deixasse só: const response = await fetch("/api/auth"); ele faria um get, então faço:
             const response = await fetch("/api/auth", {
@@ -37,9 +40,25 @@ function Home() {
 
             const data = await response.json(); //o retorno eu boto em "data"
 
+            //Assim que vier a response:
+            if(data.errors) {
+                setServerErrors(data.errors);
+            } else {
+                console.log("Sucess! Redirect to home page.")
+            }
+
             setSubmitting(false);
         })}
       >
+
+          {serverErrors ? (
+              <ul>
+                  {serverErrors.map((error) => {
+                      <li key={error}>{error}</li>
+                  })}
+              </ul>
+          ) : null}
+          
         <div>
           <label htmlFor="name">Name</label>
           <input
